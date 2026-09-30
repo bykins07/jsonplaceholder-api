@@ -99,3 +99,46 @@ button:hover {
 .controls button {
     margin: 0;
 }
+
+.form-section {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+}
+
+.form-section h2 {
+    margin-bottom: 20px;
+}
+
+.form-section label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.form-section input,
+.form-section textarea {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.form-section textarea {
+    min-height: 120px;
+}
+
+.form-section button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#formMessage {
+    margin-top: 15px;
+}

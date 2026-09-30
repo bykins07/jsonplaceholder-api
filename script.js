@@ -1,7 +1,8 @@
-const API_URL = "https://jsonplaceholder.typicode.com/posts";
+const API_URL = "https://jsonplaceholder.typicode.com";
 
 const postsContainer = document.getElementById("posts");
 
+const formMessage = document.getElementById("formMessage");
 
 // ====================
 // GET
@@ -161,3 +162,72 @@ document
 document
     .getElementById("deletePost")
     .addEventListener("click", deletePost);
+
+    const postForm = document.getElementById("postForm");
+
+postForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const title = document.getElementById("title").value.trim();
+const body = document.getElementById("body").value.trim();
+const userId = document.getElementById("userId").value.trim();
+const formMessage = document.getElementById("formMessage");
+
+    if (title.trim() === "") {
+    formMessage.textContent = "Please enter a title.";
+    return;
+}
+
+if (body.trim() === "") {
+    formMessage.textContent = "Please enter a body.";
+    return;
+}
+
+if (userId.trim() === "" || isNaN(userId)) {
+    formMessage.textContent = "Please enter a valid User ID.";
+    return;
+}
+
+    
+    // Validation
+    if (title === "") {
+        formMessage.textContent = "Please enter a title.";
+        return;
+    }
+
+    if (body === "") {
+        formMessage.textContent = "Please enter the post body.";
+        return;
+    }
+
+    if (userId === "") {
+        formMessage.textContent = "Please enter a user ID.";
+        return;
+    }
+
+    if (Number(userId) <= 0) {
+        formMessage.textContent = "User ID must be greater than 0.";
+        return;
+    }
+
+    // Send data to API
+    const response = await fetch(`${API_URL}/posts`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            title: title,
+            body: body,
+            userId: Number(userId)
+        })
+    });
+
+    const post = await response.json();
+
+    console.log("Created post:", post);
+
+    formMessage.textContent = `Post created successfully! ID: ${post.id}`;
+
+    postForm.reset();
+});
